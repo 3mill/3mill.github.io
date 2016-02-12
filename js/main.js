@@ -64,7 +64,7 @@ jQuery(document).ready(function($) {
          greetings: "[[b;#44D544;]                           \n"+
 
     
-                    "Hello, willkommen, bienvenue, bienvenida ]\n\n\nSalut omuletule :), scrie [[b;#44D544;]ajutor] pentru lista de comenzi sau  [[b;#44D544;]emil] ca sa citesti despre mine :).\n\n",
+                    "Hello, willkommen, bienvenue, bienvenida ]\n\n\nSalut omuletule :-), scrie [[b;#44D544;]ajutor] pentru lista de comenzi sau  [[b;#44D544;]emil] ca sa citesti despre mine :).\n\n",
                 prompt: function(p){
             var path = '~'
             p(e + ":" + path + "# ");
