@@ -12,11 +12,7 @@ var App = {
         if(ga != undefined) ga('send', 'event', 'help');
     },
 
-        ls: function() {
-            this.error('<ls> is not available. I guess you want to list available commands with <help>:');
-             showHelp(this);
-        if(ga != undefined) ga('send', 'event', 'ls');
-    },
+
     emil: function() {
         this.echo("\nHei, bun venit!"); 
         this.echo("Sunt [[b;#44D544;]Emil] si va urez lectura placuta.");
@@ -25,9 +21,10 @@ var App = {
         if(ga != undefined) ga('send', 'event', 'whoami');
     },
     contact: function() {
-        this.echo("Get in touch via:")
+        this.echo("Numar telefon:")
         this.echo("Email: " + e); 
-        this.echo("Twitter: @adv4nced"); 
+        this.echo("Twitter: "); 
+        this.echo("Facebook: "); 
 
         if(ga != undefined) ga('send', 'event', 'contact');
     },
@@ -36,17 +33,27 @@ var App = {
        blog: function() {
         if(ga != undefined) ga('send', 'event', 'publications');
         this.echo("Se incarca... Va rog asteptati o secunda ... \n")
-        setTimeout(function(){ document.location.href = 'https://google.ro'; }, 2500);
+        setTimeout(function(){ document.location.href= 'https://google.ro '; }, 2500);
     },
 
 
 
   facebook: function() {
         this.echo("https://www.facebook.com/emil.gavril \n")
+        this.echo("vrei sa-mi accesezi pagina? \n")
         if(ga != undefined) ga('send', 'event', 'services');
     },
 
+                                  da: function() {
+                                        this.echo("Se incarca... Va rog asteptati o secunda ... \n")
+                                        setTimeout(function(){ document.location.href= 'https://www.facebook.com/emil.gavril '; }, 2500);      
+                                    },
 
+                                  nu: function() {
+                                        this.echo("De ce nu vrei? :) \n")
+                                      this.echo("Zic sa te mai gandesti, si zi un Da :) \n")
+                                     if(ga != undefined) ga('send', 'event', 'services');
+                                   },
 
 }
 
