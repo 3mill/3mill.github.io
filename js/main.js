@@ -8,7 +8,6 @@ var App = {
     },
     ajutor: function() {
       showHelp(this);
-
         if(ga != undefined) ga('send', 'event', 'help');
     },
 
