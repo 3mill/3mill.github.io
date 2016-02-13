@@ -1,0 +1,45 @@
+---
+layout: post
+title: "Getting Dwarf Fortress to Work on Linux"
+---
+
+<h2>{{ page.title }}</h2>
+
+<p class="publish_date">24 Jun 2013</p>
+
+<p>Today, I decided to see if I could get Dwarf Fortress (v0.34.11) running in my 64-bit Arch Linux environment.
+  Immediately, I had a problem .</p>
+
+<p align="center">
+  <img src="https://s3-us-west-2.amazonaws.com/robertqualls.com/images/dwarf-fortress-error.png" alt="Dwarf Fortress Error" align="center" />
+</p>
+
+<p> Doing some googling took me to <a href="http://www.bay12games.com/dwarves/mantisbt/view.php?id=4146">
+    this page</a>, which didn't help me much since it claimed the issue was resolved in an earlier version.</p>
+
+<p> It then occurred to me that I never tried running the game as root.  Now, running 3rd party software
+  as root is generally considered a bad idea, since it could conceivably do something like 
+  <a href="http://mythipedia.wikia.com/wiki/Myth_II:_Soulblighter#Myth_II_Installer_bug" class="red">
+    wipe your whole hard drive.</a> I decided to take my chances, and - lo and behold - it worked!
+  
+  Now I might be stupid enough to run a piece of software as root, but I'm smart enough to stop
+  while I'm ahead. The Dwarf Fortress 0.34.11 installation folder is /opt/df_linux, and it appears 
+  that Dwarf Fortress requires permissions to be wide open (7).</p>
+
+<p>If you want everyone on the computer to have the ability to play Dwarf Fortress, just issue the
+    following command:</p>
+
+<p class="terminal">sudo chmod -R 777 /opt/df_linux</p>
+
+<p>The key here is that you issue **7 as the permission code. This makes read, write, and execute
+  possible for every file in /opt/df_linux, for every user. The -R flag is what sets permissions recursively.
+  An alternative is using a 7** code and using chown to set the owner of the files as your username.
+
+<p class="terminal">
+  sudo chmod -R 711 /opt/df_linux <br />
+  sudo chown -R username /opt/df_linux
+</p> 
+  
+<p>This problem is probably specific to my Arch package, but it could happen on any system 
+  where permissions are not properly configured during the installation process. If you would like
+  to know more about how chmod sets permissions, go <a href="http://catcode.com/teachmod/">here</a>.</p>

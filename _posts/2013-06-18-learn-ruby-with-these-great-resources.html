@@ -1,0 +1,125 @@
+---
+layout: post
+title: "Learn Ruby With These Great Resources"
+---
+
+<h2>{{ page.title }}</h2>
+
+<p class="publish_date">18 Jun 2013</p>
+
+<p>If you're looking to learn Ruby, the internet can hook you up. This is not an 
+  exhaustive list, but these are some of the resources that I have found useful.</p>
+
+<p><u>Books:</u><br />
+
+<p>
+  <a href="http://www.amazon.com/Eloquent-Ruby-Addison-Wesley-Professional-Series/dp/0321584104" class="red">
+    Eloquent Ruby - Russ Olsen</a> - First on the list for a reason. If you're going to read ANY
+  book on Ruby, this is it. It's concise and yet manages to cover just about anything you need to know
+  about the fundamentals of Ruby. In addition, each chapter is short, focused, and highly-structured, 
+  so you never feel like you're fighting against the length of the book.
+</p>
+
+<p>
+  <a href="http://www.amazon.com/Metaprogramming-Ruby-Program-Like-Pros/dp/1934356476" class="red">
+    Metaprogramming Ruby - Paolo Peretta</a> - A lot of reviewers on amazon complained that its style
+  was too similar to "<a href="http://mislav.uniqpath.com/poignant-guide">Why's Poignant Guide</a>."
+  It <b>is</b> wrapped in a fluffy, condescending story where an experienced coworker informs you about
+  all of your metaprogramming failings, but I must say that I learned a lot. In fact, I put an 
+  <a href="https://github.com/rlqualls/learning-metaprogramming-ruby">example guide</a> on my github.
+  The first half of the book covers the basics of metaprogramming in Ruby, while the second half analyzes 
+  examples from popular Ruby libraries.
+</p>
+
+<p>
+  <a href="http://www.amazon.com/Practical-Object-Oriented-Design-Ruby-Addison-Wesley/dp/0321721330" class="red">
+    Practical Object-Oriented Design in Ruby: An Agile Primer - Sandi Metz</a> - Sandi Metz is uncommon in 
+  that she has both the ability to write well <i>and</i> a solid grasp of software engineering. To get a 
+  glimpse of her communication style, <a href="http://confreaks.com/presenters/211-sandi-metz">
+  watch one of her talks</a>. This is destined to be a software-engineering classic.
+</p>
+
+<p>
+  <a href="http://www.amazon.com/The-Well-Grounded-Rubyist-David-Black/dp/1933988657" class="red">
+    The Well Grounded Rubyist - David Black</a> - I put this last because, even though it's filled with
+  tons of great Ruby knowledge, some readers may find it a bit much, as did I. It is quite verbose. I 
+  cannot say I would recommend it to anyone who just wants to learn enough Ruby to be dangerous, but if 
+  you're writing Ruby for a living, at some point you will want to pick it up.
+</p>
+
+</p>
+
+<p><u>Websites:</u>
+
+  <p>
+    <a href="http://codeschool.com" class="red">
+      Codeschool</a> - This is a set of interactive courses from the group at Envy Labs. Although they
+    include Ruby, the collection of courses run the gamut of web development. The production values are 
+    as high as they get. Most courses come with a set of instructional videos and some hands-on
+    coding exercises. You can use your github account, and there is a  
+    <a href="http://www.codeschool.com/users/rlqualls">public report card</a> for employers 
+    to see. The subscription costs $25/month, but at the time of this writing, if you complete 
+    at least one course per month, it's $20/month. <a href="http://tryruby.org">Try Ruby</a> is free.
+  </p>
+
+  <p>
+    <a href="http://rubykoans.com" class="red">
+      Ruby Koans</a> - Unlike the other interactive resources, Ruby Koans specifically focus on edge-cases
+    in the Ruby language.
+  </p>
+
+  <p>
+    <a href="http://rubymonk.com" class="red">
+      Ruby Monk</a> - A set of interactive Ruby courses. Also, it has an entire course dedicated to 
+    metaprogramming in Ruby. It's possible to use your github account, and there is a public
+    report card to show potential employers/clients. The courses appear to all be free at the time of this
+    writing.
+  </p>
+
+  <p>
+    <a href="http://confreaks.com" class="red">
+      Confreaks</a> - This site is a nice collection of conference talks that cover Ruby and web development.
+    You can search by topic or presenter. Totalmente gratis.
+  </p>
+
+  <p>
+    <a href="http://rubytapas.com" class="red">
+      Rubytapas</a> - A collection of short videos (2-5mins) done by Avdi Grimm. He uses xmpfilter to display
+    results inside his text editor. Some episodes are free, but full-access costs $9/month.
+  </p>
+
+  <p>
+    <a href="http://peepcode.com" class="red">
+      Peepcode</a> - A bit more expensive than the other resources, peepcode has videos on a variety of
+    subjects, including Ruby and RoR. $55 for a 5-pack. Pricey, but you get what you pay for.
+  </p>
+
+  <p>
+    <a href="http://ruby.bastardsbook.com/toc/" class="red">
+      The Bastards Book</a> - Covers everything from the very basics to regular expressions and web scraping
+    using libraries like <a href="http://nokogiri.org">Nokogiri</a> and <a href="http://mechanize.rubyforge.org">
+      Mechanize</a>.
+    Free.
+  </p>
+
+  <p>
+    <a href="http://ruby.railstutorial.org/ruby-on-rails-tutorial-book" class="red">
+      The Ruby on Rails Tutorial</a> - Although this is specific to Rails, it is one of the better
+    tutorials I have ever gone through. And it's free. The book covers building an industrial-strength web
+    app in Rails using git and heroku. A kindle e-book is available, but the online book was considerably 
+    more up to date when I compared them.
+  </p>
+</p>
+
+<p><u>Tools:</u>
+
+  <p><a href="https://github.com/tnoda/rcodetools" class="red">
+      Xmpfilter</a> - Produces magical code annotations inside your text editor.  I used this extensively when
+    putting together my metaprogramming example guide. Xmpfilter is part of the rcodetools gem. You will need
+    to install the gem and also go through whatever steps are necessary to get it working with your editor.
+  </p>
+
+  <p><a href="https://github.com/scrooloose/syntastic" class="red">
+      Syntastic</a> - Syntax checking plugin for vim. This will help spot syntax-level Ruby issues when you 
+    save your files.
+  </p>
