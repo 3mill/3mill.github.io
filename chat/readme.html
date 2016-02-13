@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8" />
+<title>Ajax - PHP Script Chat Simplu MarPlo.net</title>
+</head>
+<body>
+<center><h2>Ajax - PHP Script Chat Simplu</h2></center>
+Acesta este un <strong>Script de Chat Simplu</strong>, ce poate fi adaugat in pagini web. Este creat cu PHP si Javascript, folosind tehnologia OOP (Object-Oriented Programming - cu Clase si obiecte) si Ajax.
+<h4>Cerinte sistem</h4>
+- PHP 5.4+<br/>
+- Navigator Web cu JavaScript activ.<br/><br/>
+Acest script poate sa salveze datele in baza de date MySQL sau in fisiere text pe server.<br/>
+Poate sa contina una sau mai multe camere de chat, cu afisarea utilizatorilor online din fiecare camera.<br/>
+Utilizatorul poate adauga "smiles" (emoticons) in chat si poate formata textul cu Bold, Italic si Underline, il puteti testa online la pagina: <a href="http://www.marplo.net/php-mysql/php-script-chat-simplu-s.php" title="PHP Script Chat Simplu">PHP Script Chat Simplu</a>.<br>
+- Pentru a evita spam-ul, utilizatorul nu poate adauga doua texte identice unul dupa altul, iar urmatorul text in chat il poate adauga dupa 3 secunde.<br>
+Numele, camera de chat si setarea On / Off pentru sunet sunt salvate in cookie, astfel, la urmatoarea vizita vor fi citite si folosite din cookie.<br/>
+Scriptul a fost testat cu success pe navigatoarele web: Mozilla Firefox, Internet Explorer, Google Chrome si Opera.<br/>
+&bull; - <i>Acest script de chat este gratuit, <b>prin urmare nu se acorda suport</b>, dar daca aveti intrebari sau probleme de instalare, postati pe Forum-ul site-ului <a href="http://www.marplo.net/forum/" title="Forum MarPlo.net">www.marplo.net/forum/</a> la sectiunea "Scripturi de pe site", pe forum veti primi raspuns.</i>
+<h4>Instalare</h4>
+1. Daca vreti sa salvati datele de chat in MySQL, deschideti fisierul "<b>setchat.php</b>" (in directorul "chatfiles/") si adaugati datele pentru conectare la baza de date MySQL in array-ul <b>$mysql</b> (linia 8).<br>
+2. Si setati valoarea <b>'mysql'</b> la constanta <b>STORAGE</b> (linia 10).<br>
+3. Daca vreti sa salvati datele in fisiere text pe server, lasati valoarea <b>'file'</b> in constanta STORAGE.<br>
+4. Script-ul contine initial doua camere de chat: English si Nature. Ca sa Adaugati /Modificati /Sterge camere de chat, editati array-ul <b>$chatrooms</b>.<br>
+5. Copiati pe server directoarele: "<b>chatfiles</b>", "<b>chattxt</b>" si "<b>chatex</b>" (cu toate fisierele din ele, in acelasi director in care aveti fisierul unde doriti sa includeti chat-ul). <i>Fisierul "test.html" e pentru test.</i><br>
+6. Daca vreti sa salvati datele in fisiere text, acordati directorului "<b>chattxt</b>" permisiunile CHMOD 0777 (sau 0755). In acest director scriptul PHP va crea fisierele text in care sunt stocate chatul pentru fiecare camera de chat.<br>
+7. Daca ati setat sa salvati datele in MySQL, accesati fisierul "<b>create_tables.php</b>" (in directorul "chatfiles/") pe server. De exemplu:
+<blockquote><b>http://localhost/chatfiles/create_tables.php</b></blockquote>
+8. In pagina in care doriti sa includeti chat-ul adaugati urmatorul cod:
+<ul style="background:yellow;font-weight:700;">&lt;div id=&quot;chatarea&quot; data-style=&quot;auto&quot;&gt;&lt;/div&gt;<br>
+&lt;script type=&quot;text/javascript&quot; src=&quot;chatfiles/chatfunctions.js&quot;&gt;&lt;/script&gt;</ul>
+- In atributul <b>data-style</b> poate avea unul din aceste valori:<br>
+<ul>
+<li><b>large</b> - chat-ul e afisat pe o zona mare (width 600px).</li>
+<li><b>mini</b> - chat-ul e afisat intr-o zona mica (width 245px).</li>
+<li><b>auto</b> - chat-ul isi schimba dimensiunea (large sau mini) in functie de lungimea ferestrei.</li>
+</ul>
+<h4>Setari Admin</h4>
+- In fisierul "setchat.php" (in directorul "chatfiles/") puteti modifica setarile initiale.<br />
+- Initial, scriptul afiseaza ultimele 40 de randuri de text, puteti modifica acest numar la linia de cod:
+<ul><b>define('MAXROWS', 40);</b></ul>
+- Script-ul permite utilizatorilor sa adauge, pe langa smiles, si link-uri; acestea vor avea atributul <i>rel="nofallow"</i>, dar daca doriti sa nu fie adaugate link-uri, inlocuiti numarul 1 cu 0, din linia de cod:
+<ul><b>define('CHATLINK', 1);</b></ul>
+<div style="background:#ededfe;">
+- La urmatoarea linie de cod puteti seta parola folosita pentru stergerea randurilor de chat din camerele /tabelele cu chat (<i>inlocuiti "adminpass" cu parola pe care o doriti</i>):
+<ul><b>define('CADMPASS', 'adminpass');</b></ul>
+- Ca sa stergeti randurile de text din camera de chat, sau din tabelele din baza de date, accesati in browser fisierul <b>chatfiles/setchat.php</b> cu <b>?mod=admin</b> in URL. De exemplu:
+<blockquote><b>http://localhost/chatfiles/setchat.php?mod=admin</b></blockquote>
+Apoi selectati camera de chat, si folositi parola setata la CADMPASS.</div><br/>
+<div style="background:yellow;">
+- Daca aveti un script de inregistrare /logare pe site si vreti ca doar utilizatorii autentificati sa adauge text in chat, setati valoarea 0 la constanta <b>CHATADD</b>. Apoi, setati <b>$_SESSION['username']</b> cu variabila /sesiunea folosita de scriptul de logare pt. retinere nume utilizator, la urmatorul cod in "setchat.php".
+<ul><b>define('CHATADD', 1);<br/>
+if(!isset($_SESSION)) session_start();<br>
+if(CHATADD !== 1) {<br/> &nbsp; &nbsp;
+  if(isset($_SESSION['username'])) define('CHATUSER', $_SESSION['username']);<br/>
+}</b></ul></div>
+In directorul "chatex/" sunt doua fisiere WAV suplimentare: "<b><i>beep2.wav</i></b>" si "<b><i>beep3.wav</i></b>". Initial, scriptul foloseste "<b>beep1.wav</b>". In cazul in care doriti sa schimbati sunetul declansat cand e adaugat un nou text in camera de chat, modificati in fisierul "<b>chatfunctions.js</b>" (linia 14) valoarea variabilei:
+<ul><b>var beepfile = 'beep1.wav';</b></ul>
+- In baza de date MySQL, scriptul creaza un tabel: 'chat_users' care retine utilizatorii online, si cate un tabel "chat_NUME_CAMERA" pentru fiecare camera de chat.<br><br>
+<div style="background:#ededfe;">
+Daca e necesar, puteti seta ca fisierele text cu datele de chat sa fie salvate in sub-director in "chattxt/".<br>
+- Numele sub-directorului poate fi definit in variabila <b>$c_subdir</b> (in "setchat.php" linia 21). E util in cazul in care doriti sa folositi un director dinamic pt. fisierele text cu chat.<br>
+- Script-ul va crea automat sub-directorul in "chattxt/", cu numele adaugat in $c_subdir si CHMOD 0755.</div><br>
+Script-ul este construit sa poata crea singur fisierele text necesare (cu datele in format JSON), dar pt. asta modulul PHP trebuie sa aibe permisiuni de scriere si creare fisiere in directorul "chattxt/", sa aibe CHMOD 0777 (sau 0755). Daca primiti eroare si PHP nu poate crea singur fisierele (din cauza restrictiilor de pe server), creati-le dv. manual in directorul "chattxt/" si acordati-le permisiunile CHMOD 0777.<br>
+Scriptul poate fi usor modificat ca sa fie folosit si in alte limbi, doar traduceti textele din fisierul "<b>texts.php</b>" (in directorul "chatfiles/"). Sunt texte in romana si traducere pentru limba engleza.<br>
+Daca doriti sa modificati culorile, sau designul chatului, editati proprietatile CSS in "<b>chatstyle.css</b>" (sau "<b>chatstyle_mini.css</b>", versiunea-mini), in directorul "chatfiles/".<br>
+Fisierul "<b>chatstyle_mini.css</b>" poate fi folosit pentru o versiune grafica de dimensiuni mai mici (<i>latime 245 px</i>), pe care-l puteti pune de exemplu intr-o zona laterala in pagini. In aceasta versiune, pentru a economisi spatiul, nu mai este afisata zona cu utilizatorii.<br><br><br>
+<i>Cu bucurie,<br>
+Marius</i><br>
+ &nbsp; &nbsp; <a href="http://www.marplo.net/" title="Flash Games and Free courses">MarPlo.net</a> / <a href="http://coursesweb.net/" title="Web Programming Courses">CoursesWeb.net</a><br><br>
+</body>
+</html>
