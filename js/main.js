@@ -14,7 +14,10 @@ var App = {
 
     emil: function() {
         this.echo("\nHei, bun venit!"); 
-        this.echo("Sunt [[b;#44D544;]Emil] si va urez lectura placuta.");
+        this.echo("\nSunt [[b;#44D544;]Emil] si va urez lectura placuta.");
+        this.echo("https://www.facebook.com/emil.gavril \n")
+        
+        
         
 
         if(ga != undefined) ga('send', 'event', 'whoami');
@@ -32,7 +35,7 @@ var App = {
        blog: function() {
         if(ga != undefined) ga('send', 'event', 'publications');
         this.echo("Se incarca... Va rog asteptati o secunda ... \n")
-        setTimeout(function(){ document.location.href= 'https://google.ro '; }, 2500);
+        setTimeout(function(){ document.location.href= 'jjj.html'; }, 2500);
     },
 
 
