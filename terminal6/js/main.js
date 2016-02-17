@@ -1,354 +1,108 @@
-/*
- *
- *
- *
- */
-
-var currentFolder = "/";
-var termRootPrompt = 'term#th.com/';
-var commandText = function(text){
-    return "[[g;#EEEEEE;]" + text + "]";
-}
-
-var titleText = function(text){
-    return "[[u;inherit;]" + text + "]";
-}
-
-var adminEmail = "havadartalha@gmail.com"
-var me = null;
-
-var getMaxSkillNameLength = function() {
-    var max = 0;
-    me.skills.forEach(function (item) {
-        if(commandText(item.name).length > max) {
-            max = commandText(item.name).length;
-        }
-    });
-    return max;
-}
-var getLevelString = function(level) {
-    var perc = level * 10;
-    var midString = "";
-    for (var i = 0; i < 100; i++) {
-        if (i < perc) {
-            midString += "=";
-        } else {
-            midString += " ";
-        }
-    }
-    if (perc > 80) { // Green color.
-        return "##[[g;#2DB500;]" + midString + "]##";
-    } else if (perc > 60) { // Yellow color.
-        return "##[[g;#D4F500;]" + midString + "]##";
-    } else if (perc > 40) { // Orange color.
-        return "##[[g;#F59F00;]" + midString + "]##";
-    } else { // Red color.
-        return "##[[g;#DE1600;]" + midString + "]##";
-    }
-};
-var formatString = function (str1, str2, maxLengOfStr1, padRight) {
-    var pad = padRight || 0;
-    var distance = maxLengOfStr1 - str1.length;
-    for (var i = 0; i < distance; i++) {
-        if (str1.length < maxLengOfStr1) {
-            str1 = str1 + " ";
-        }
-    }
-    if (pad > 0) {
-        for (var i = 0; i < pad; i++) {
-            str1 = str1 + " ";
-        }
-    }
-    return str1 + str2;
-}
-
-var catProjects = function(term) {
-    term.echo();
-    me.projects.forEach(function(item) {
-        term.echo("|  " + commandText(item.name) + "           " + item.url);
-    });
-    term.echo();
-};
-
-var catSkills = function(term) {
-    term.echo();
-    term.echo("|  " + commandText('My Skills'));
-    var maxlen = getMaxSkillNameLength();
-    console.log("maxlen",maxlen);
-    me.skills.forEach(function(item) {
-        var result = formatString(commandText(item.name), getLevelString(item.level),maxlen, 10);
-        term.echo("|  " + result);
-    });
-    term.echo();
-};
-
-var catAwards = function (term) {
-    term.echo();
-    me.awards.forEach(function(item) {
-        term.echo("|  " + commandText(item.name) + " - " + item.description);
-    });
-    term.echo();
-};
-
-var catGithub = function(term) {
-    term.echo();
-    term.echo("|\t" + me.github);
-    term.echo();
-};
-
-var catLinkedin = function(term) {
-    term.echo();
-    term.echo("|\t" + me.linkedin);
-    term.echo();
-};
-
-var catFacebook = function(term) {
-    term.echo();
-    term.echo("|\t" + me.facebook);
-    term.echo();
-};
-
-var catTwitter = function(term) {
-    term.echo();
-    term.echo("|\t" + me.twitter);
-    term.echo();
-};
-
-var catContact = function(term) {
-    term.echo();
-    term.echo("|  " + commandText("Email") + ":         " + me.email);
-    term.echo("|  " + commandText("LinkedIn") + ":      " + me.linkedin);
-    term.echo();
-};
-
-var catCredits = function(term) {
-    term.echo();
-    term.echo("|  Site built by " + commandText('Talha Havadar'));
-    term.echo("|  Using " + commandText('Jquery Terminal Emulator') + " by " + commandText('Jakub Jankiewicz') + ": http://terminal.jcubic.pl");
-    term.echo();
-};
-
-var catAbout = function(term) {
-    term.echo();
-    term.echo(me.about_me);
-    term.echo();
-};
-
-var catLastPost = function(term) {
-    term.echo();
-    term.echo("Coming soon..");
-    term.echo();
-};
-
-var showFile = function(term, file) {
-    if (currentFolder == "/") {
-        switch(file) {
-            case "about":
-                catAbout(term);
-                break;
-            case "projects":
-                catProjects(term);
-                break;
-            case "skills":
-                catSkills(term);
-                break;
-            case "awards":
-                catAwards(term);
-                break;
-            case "github":
-                catGithub(term);
-                break;
-            case "linkedin":
-                catLinkedin(term);
-                break;
-            case "facebook":
-                catFacebook(term);
-                break;
-            case "twitter":
-                catTwitter(term);
-                break;
-            case "contact":
-                catContact(term);
-                break;
-            case "credits":
-                catCredits(term);
-                break;
-            default:
-                return "ERROR";
-        }
-    } else if(currentFolder == "blog/") {
-        switch(file) {
-            case "lastPost":
-                catLastPost(term);
-                break;
-            default:
-                return "ERROR";
-        }
-    }
-
-}
-
-var list = function(term) {
-    term.echo();
-    term.echo(commandText("Current directory: " + currentFolder));
-    switch(currentFolder) {
-        case "/":
-            term.echo();
-            term.echo("\t[[b;#eee;]about   ]\t[[b;#00F;]blog   ]\t[[b;#eee;]skills  ]");
-            term.echo("\t[[b;#eee;]projects]\t[[b;#eee;]awards ]\t[[b;#00f;]web     ]");
-            term.echo("\t[[b;#eee;]contact ]\t[[b;#eee;]twitter]\t[[b;#eee;]facebook]");
-            term.echo("\t[[b;#eee;]github  ]\t[[b;#eee;]credits]\t[[b;#eee;]linkedin]");
-            term.echo();
-            break;
-        case "blog/":
-            term.echo();
-            term.echo("\t[[b;#fff;]lastPost]\t[[b;#00F;]seeWebView]");
-            term.echo();
-            break;
-    }
-};
-
-var cd = function(term, path) {
-    switch(currentFolder) {
-        case "/":
-            if (path == "/web" || path == "web/" || path == "/web/" || path == "web") {
-                term.echo();
-                term.echo("Coming soon..");
-                term.echo();
-            } else if (path == "/blog" || path == "blog/" || path == "/blog/" || path == "blog") {
-                currentFolder = "blog/";
-                term.set_prompt(termRootPrompt + currentFolder + " >");
-            } else {
-                return "ERROR";
-            }
-            break;
-        case "blog/":
-            if (path == "/seeWebView" || path == "seeWebView/" || path == "/seeWebView/" || path == "seeWebView") {
-                term.echo();
-                term.echo("Coming soon..");
-                term.echo();
-            } else if (path == "..") {
-                currentFolder = "/";
-                term.set_prompt(termRootPrompt + " >");
-            } else {
-                return "ERROR";
-            }
-            break;
-    }
-};
+var e = "emil";
 
 var App = {
-    cd: function(path) {
-        if (cd(this,path) == "ERROR") {
-            this.error("Wrong argument there is no directory ("+ path +")")
-        };
+    echo: function(text) {
+        this.echo(text);
+
+        if(ga != undefined) ga('send', 'event', 'echo', 'text', text);
     },
-    ls: function() {
-        list(this);
-    },
-    cat: function(file) {
-        if (showFile(this,file) == "ERROR") {
-            this.error("Wrong argument there is no file ("+ file +")")
-        }
-    },
-    help: function(){
-        this.echo();
-        this.echo("|  " + commandText("cat") + "              - For review file.");
-        this.echo("|  " + commandText("ls") + "               - List files and folders in current directory.");
-        this.echo("|  " + commandText("cd") + "               - Change directory.");
-        this.echo("|  " + commandText("help") + "             - This screen.");
-        this.echo();
+    ajutor: function() {
+      showHelp(this);
+        if(ga != undefined) ga('send', 'event', 'help');
     },
 
-    about: function() {
-        this.error("Use cat command for review.")
-    },
-    projects: function() {
-        this.error("Use cat command for review.")
-    },
-    skills: function() {
-        this.error("Use cat command for review.")
-    },
-    awards: function() {
-        this.error("Use cat command for review.")
-    },
-    github: function() {
-        this.error("Use cat command for review.")
-    },
-    linkedin: function() {
-        this.error("Use cat command for review.")
-    },
-    facebook: function() {
-        this.error("Use cat command for review.")
-    },
-    twitter: function() {
-        this.error("Use cat command for review.")
+
+    emil: function() {
+        this.echo("\nHei, bun venit!"); 
+        this.echo("\nSunt [[b;#44D544;]Emil] si va urez lectura placuta.");
+        this.echo("https://www.facebook.com/emil.gavril \n")
+        
+        
+        
+
+        if(ga != undefined) ga('send', 'event', 'whoami');
     },
     contact: function() {
-        this.error("Use cat command for review.")
+        this.echo("Numar telefon:")
+        this.echo("Email: " + e); 
+        this.echo("Twitter: "); 
+        this.echo("Facebook: "); 
+
+        if(ga != undefined) ga('send', 'event', 'contact');
     },
-    credits: function() {
-        this.error("Use cat command for review.")
+
+
+       blog: function() {
+        if(ga != undefined) ga('send', 'event', 'publications');
+        this.echo("Se incarca... Va rog asteptati o secunda ... \n")
+        setTimeout(function(){ document.location.href= 'jjj.html'; }, 2500);
     },
-    web: function() {
-        this.error("Use cd command for navigate to website.")
+
+
+
+  facebook: function() {
+        this.echo("https://www.facebook.com/emil.gavril \n")
+        this.echo("vrei sa-mi accesezi pagina? \n")
+        if(ga != undefined) ga('send', 'event', 'services');
     },
-    blog: function() {
-        this.error("Use cd command for change directory to blog.")
-    },
-    seeWebView: function() {
-        if (currentFolder == "/") {
-            this.error("Ther is no file or folder in this directory named (seeWebView)");
-        } else {
-            this.error("Use cd command for navigate to blog homepage in website.")
-        }
-    },
-    lastPost: function() {
-        if (currentFolder == "/") {
-            this.error("Ther is no file or folder in this directory named (seeWebView)");
-        } else {
-            this.error("Use cat command for review.")
-        }
-    }
+
+                                  da: function() {
+                                        this.echo("Se incarca... Va rog asteptati o secunda ... \n")
+                                        setTimeout(function(){ document.location.href= 'https://www.facebook.com/emil.gavril '; }, 2500);      
+                                    },
+
+                                  nu: function() {
+                                        this.echo("De ce nu vrei? :) \n")
+                                      this.echo("Zic sa te mai gandesti, si zi un Da :) \n")
+                                     if(ga != undefined) ga('send', 'event', 'services');
+                                   },
+
 }
 
+window.mobileAndTabletcheck = function() {
+  var check = false;
+  (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true})(navigator.userAgent||navigator.vendor||window.opera);
+  return check;
+}
 
 jQuery(document).ready(function($) {
-    $.getJSON('/static/mainApp/json/greeting.json', function(data) {
-        console.log(data);
-    });
-    $.getJSON('/api/cmdadmins/?format=json', function(data) {
-        data.forEach(function(item) {
-            if (item.email === adminEmail) {
-                me = item;
-            };
+    
+     
+     
+           $('body').terminal(App, {
+         greetings: "[[b;#44D544;]                           \n"+
 
-            if (me != null) {
-                $('body').terminal(App, {
-                    greetings: function(cb){
-                        $.getJSON('/static/mainApp/json/greeting.json', function(data) {
-                            var message = data.message + "\n\n" + me.greetingMessage + "\n\n";
-                            cb($.terminal.encode(message));
-                        });
-                    },
-                    onBlur: function() {
-                        // prevent loosing focus
-                        return false;
-                    },
-                    onClear: function(term) {
-                        $.getJSON('/static/mainApp/json/greeting.json', function(data) {
-                            var message = data.message + "\n\n" + me.greetingMessage + "\n\n";
-                            term.echo(message);
-                        });
-                    },
-                    completion: true,
-                    checkArity: false,
-                    prompt: termRootPrompt + " >"
-                });
-            } else {
-                alert("Something went wrong..");
-            }
+    
+                    "Hello, willkommen, bienvenue, bienvenida ]\n\n\nSalut omuletule :-), scrie [[b;#44D544;]ajutor] pentru lista de comenzi sau  [[b;#44D544;]emil] ca sa citesti despre mine :).\n\n",
+                prompt: function(p){
+            var path = '~'
+            p(e + ":" + path + "# ");
+        },
+        onBlur: function() {
+            // prevent loosing focus
+            return false;
+        },
+        tabcompletion: true
         });
-    });
+     
 
+
+ 
 });
+
+
+
+
+
+function showHelp(consoleObj)
+{
+        consoleObj.echo("Comenzile disponibile:");
+        consoleObj.echo("\t[[b;#44D544;]emil]      despre mine");
+        consoleObj.echo("\t[[b;#44D544;]facebook]      pagina mea de facebook");
+        consoleObj.echo("\t[[b;#44D544;]contact]       cum poti da de mine"); 
+        consoleObj.echo("\t[[b;#44D544;]blog]      blogul meu :)");
+        consoleObj.echo("\t[[b;#44D544;]clear]       clear the console"); 
+        consoleObj.echo("\t[[b;#44D544;]ajutor]        Heeeelp :)");                        
+        consoleObj.echo("");
+        consoleObj.echo("PRO TIP: press <tab> to trigger autocompletion");
+}
