@@ -6,56 +6,33 @@ var App = {
 
         if(ga != undefined) ga('send', 'event', 'echo', 'text', text);
     },
-    ajutor: function() {
+    ajutor2: function() {
       showHelp(this);
         if(ga != undefined) ga('send', 'event', 'help');
     },
 
 
-    emil: function() {
-        this.echo("\nHei, bun venit!"); 
-        this.echo("\nSunt [[b;#44D544;]Emil] si va urez lectura placuta.");
-        this.echo("https://www.facebook.com/emil.gavril \n")
+   
         
         
         
 
         if(ga != undefined) ga('send', 'event', 'whoami');
     },
-    contact: function() {
-        this.echo("Numar telefon:")
-        this.echo("Email: " + e); 
-        this.echo("Twitter: "); 
-        this.echo("Facebook: "); 
+    nede: function() {
+        this.echo("Nede suge pula")
+        this.echo("pula pula pula " + e); 
+     
 
         if(ga != undefined) ga('send', 'event', 'contact');
     },
 
 
-       blog: function() {
-        if(ga != undefined) ga('send', 'event', 'publications');
-        this.echo("Se incarca... Va rog asteptati o secunda ... \n")
-        setTimeout(function(){ document.location.href= 'jjj.html'; }, 2500);
-    },
 
 
 
-  facebook: function() {
-        this.echo("https://www.facebook.com/emil.gavril \n")
-        this.echo("vrei sa-mi accesezi pagina? \n")
-        if(ga != undefined) ga('send', 'event', 'services');
-    },
 
-                                  da: function() {
-                                        this.echo("Se incarca... Va rog asteptati o secunda ... \n")
-                                        setTimeout(function(){ document.location.href= 'https://www.facebook.com/emil.gavril '; }, 2500);      
-                                    },
 
-                                  nu: function() {
-                                        this.echo("De ce nu vrei? :) \n")
-                                      this.echo("Zic sa te mai gandesti, si zi un Da :) \n")
-                                     if(ga != undefined) ga('send', 'event', 'services');
-                                   },
 
 }
 
