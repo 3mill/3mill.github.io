@@ -120,13 +120,7 @@ jQuery(document).ready(function($) {
      
            $('body').terminal(App, {
          greetings: "[[b;#44D544;]                #                                #            \n"+
-        "                #                                #            \n"+
-        "                #                                             \n"+
-        "  ######   ######  ##   ##   ######            ###      ##### \n"+
-        " #     #  #     #   #   #   #     #              #     #     #\n"+
-        " #     #  #     #    # #    #     #              #     #     #\n"+
-        " #    ##  #     #    # #    #    ##    ##        #     #     #\n"+
-        "  #### #   ######     #      #### #    ##      #####    ##### \n\n"+
+       
                     "Verba volant, bits persist - A geek's own box]\n\n\nWelcome human, type [[b;#44D544;]help] to list available commands, [[b;#44D544;]whoami] to read something about me, or [[b;#44D544;]about] to learn about this webpage .\n\n",
                 prompt: function(p){
             var path = '~'
